@@ -39,12 +39,12 @@ CREATE TABLE registrations (
 
 CREATE VIEW event_attendance_summary AS
 SELECT e.event_id, e.title, e.capacity,
-  SUM(CASE WHEN a.status='registered' THEN 1 ELSE 0 END) AS registered_count,
-  SUM(CASE WHEN a.status='checked_in' THEN 1 ELSE 0 END) AS checked_in_count,
-  SUM(CASE WHEN a.status='waitlisted' THEN 1 ELSE 0 END) AS waitlisted_count,
-  SUM(CASE WHEN a.status='canceled' THEN 1 ELSE 0 END) AS canceled_count
+  SUM(CASE WHEN r.status='registered' THEN 1 ELSE 0 END) AS registered_count,
+  SUM(CASE WHEN r.status='checked_in' THEN 1 ELSE 0 END) AS checked_in_count,
+  SUM(CASE WHEN r.status='waitlisted' THEN 1 ELSE 0 END) AS waitlisted_count,
+  SUM(CASE WHEN r.status='canceled' THEN 1 ELSE 0 END) AS canceled_count
 FROM events e
-LEFT JOIN attendees a ON e.event_id=a.event_id
+LEFT JOIN attendees r ON e.event_id=a.event_id
 GROUP BY e.event_id,e.title,e.capacity;
 
 CREATE TABLE feedback (
