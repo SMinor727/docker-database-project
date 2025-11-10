@@ -44,8 +44,8 @@ SELECT e.event_id, e.title, e.capacity,
   SUM(CASE WHEN r.status='waitlisted' THEN 1 ELSE 0 END) AS waitlisted_count,
   SUM(CASE WHEN r.status='canceled' THEN 1 ELSE 0 END) AS canceled_count
 FROM events e
-LEFT JOIN registrations r ON e.event_id=a.event_id
-GROUP BY e.event_id,e.title,e.capacity;
+LEFT JOIN registrations r ON e.event_id = r.event_id
+GROUP BY e.event_id, e.title, e.capacity;
 
 CREATE TABLE feedback (
     feedback_id SERIAL PRIMARY KEY,
