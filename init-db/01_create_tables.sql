@@ -49,7 +49,7 @@ GROUP BY e.event_id, e.title, e.capacity;
 
 CREATE TABLE feedback (
     feedback_id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES students(user_id),
+    user_id INT REFERENCES users(user_id),
     event_id INT REFERENCES events(event_id),
     rating INT CHECK (rating >= 1 AND rating <= 5),
     comments TEXT,
